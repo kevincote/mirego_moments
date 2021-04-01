@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
-    This is the home.
+  <div class="moment">
+    This is an individual moment.
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Moment',
   components: {
   }
 }

@@ -1,32 +1,60 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="white"
+      dark
+      height="50"
+      elevation="3"
+    >
+      <v-spacer />
+      <div class="pull-left">
+        <router-link to="/">
+          <v-img
+            :src="require('@/assets/logo.png')"
+            max-width="200"
+            max-height="50"
+          />
+        </router-link>
+      </div>
+      <v-spacer />
+      <div class="pull-right">
+         <v-btn
+          depressed
+          tile
+          text
+          to="/login"
+          light
+        >
+          Sign in
+        </v-btn>
+        <v-btn
+          depressed
+          tile
+          color="#DBE6F1"
+          to="/signup"
+        >
+          <span style="color: #4175A5">Sign up</span>
+        </v-btn>
+      </div>
+      <v-spacer />
+    </v-app-bar>
+
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+  name: 'App',
 
-#nav {
-  padding: 30px;
+  components: {
+  },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  data: () => ({
+    //
+  }),
+};
+</script>
