@@ -7,41 +7,46 @@
       height="50"
       elevation="3"
     >
-      <v-spacer />
-      <div class="pull-left">
-        <router-link to="/">
-          <v-img
-            :src="require('@/assets/logo.png')"
-            max-width="200"
-            max-height="50"
-          />
-        </router-link>
-      </div>
-      <v-spacer />
-      <div class="pull-right">
-         <v-btn
-          depressed
-          tile
-          text
-          to="/login"
-          light
-        >
-          Sign in
-        </v-btn>
-        <v-btn
-          depressed
-          tile
-          color="#DBE6F1"
-          to="/signup"
-        >
-          <span style="color: #4175A5">Sign up</span>
-        </v-btn>
-      </div>
-      <v-spacer />
+      <router-link to="/">
+        <v-img
+          :src="require('@/assets/logo.png')"
+          max-width="200"
+          max-height="50"
+        />
+      </router-link>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        depressed
+        tile
+        text
+        to="/login"
+        light
+      >
+        Log in
+      </v-btn>
+      <v-btn
+        depressed
+        tile
+        color="#DBE6F1"
+        to="/signup"
+      >
+        <span style="color: #4175A5">Sign up</span>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
       <router-view></router-view>
+      <!-- <v-container>
+        <v-row>
+          <v-spacer />
+            <v-col xs=12>
+              <router-view></router-view>
+            </v-col>
+          <v-spacer />
+        </v-row>
+      </v-container> -->
     </v-main>
   </v-app>
 </template>
