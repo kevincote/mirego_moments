@@ -36,7 +36,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="main">
       <v-fab-transition>
         <router-view></router-view>
       </v-fab-transition>
@@ -59,3 +59,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.main {
+  background-image:
+    linear-gradient(to bottom right, rgba(255, 255, 255, 0.98), rgba(63, 63, 63, 0.6)),
+    url('./assets/photos_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+</style>

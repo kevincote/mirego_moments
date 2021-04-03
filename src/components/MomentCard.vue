@@ -1,6 +1,7 @@
 <template>
   <v-card
     max-width="700"
+    elevation="10"
   >
     <v-card-text>
       <v-row>
@@ -143,6 +144,9 @@ export default {
       const data = this.getSavedData();
 
       return data.comments.filter((comment) => comment.momentId === this.moment.id);
+    },
+    onClickOutside() {
+
     },
   }
 }

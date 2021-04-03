@@ -101,6 +101,6 @@ export default {
 }
 
 .moments-description {
-  color: lightgray;
+  color: rgb(65, 65, 65);
 }
 </style>
