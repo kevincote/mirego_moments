@@ -35,12 +35,51 @@ export default {
   data() {
     return {
       moments: [],
+      oldestData: undefined,
+      bottom: false,
     }
   },
-  async created() {
-    const moments = await this.$http.get(process.env.VUE_APP_MOMENTS_API);
-    this.moments = moments.data;
-  }
+  created() {
+    window.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible()
+    })
+
+    this.fetchMoments();
+  },
+  methods: {
+    async fetchMoments() {
+      const url = this.buildUrl();
+
+      const moments = await this.$http.get(url);
+      this.moments = this.moments.concat(moments.data);
+
+      this.oldestData = this.moments.slice(-1)[0].created_at;
+    },
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+
+      return bottomOfPage || pageHeight < visible;
+    },
+    buildUrl() {
+      let url = process.env.VUE_APP_MOMENTS_API;
+
+      if(this.oldestData !== undefined) {
+        url = url + `?since=${encodeURI(this.oldestData)}`
+      }
+
+      return url;
+    }
+  },
+  watch: {
+    bottom(bottom) {
+      if (bottom) {
+        this.fetchMoments();
+      }
+    }
+  },
 }
 </script>
 

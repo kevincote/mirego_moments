@@ -67,7 +67,7 @@
     </v-card-actions>
 
     <v-expand-transition>
-      <v-card-actions v-show="defaultCommentsVisible || commentsVisible">
+      <v-card-actions v-if="defaultCommentsVisible || commentsVisible">
         <moment-comments
           :moment-id="moment.id"
           :comments-data="moment.comments"
