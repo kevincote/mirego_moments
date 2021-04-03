@@ -29,7 +29,7 @@
       <v-btn
         depressed
         tile
-        color="#DBE6F1"
+        color="secondary"
         to="/sign-up"
       >
         <span style="color: #4175A5">Sign up</span>

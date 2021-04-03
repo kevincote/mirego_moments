@@ -60,6 +60,7 @@
 
       <v-btn
         icon
+        :color="commentsVisible || defaultCommentsVisible ? 'secondary' : ''"
         @click="commentsVisible = !commentsVisible"
       >
         <v-icon>mdi-comment</v-icon>
