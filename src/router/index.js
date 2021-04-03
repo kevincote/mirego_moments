@@ -12,10 +12,11 @@ const routes = [
   },
   {
     path: '/moment/:id',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "moment" */ '../views/Moment.vue')
+  },
+  {
+    path: '/sign-up',
+    component: () => import(/* webpackChunkName: "login" */ '../views/SignUp.vue')
   },
   {
     path: "not-found",
