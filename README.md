@@ -1,4 +1,6 @@
 # Never work a day replica
+View replica app at: https://kevincote.github.io/mirego_moments/
+
 Original web app: https://app.neverworkaday.com/moments
 
 ## Specs
