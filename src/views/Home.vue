@@ -38,7 +38,7 @@ export default {
     }
   },
   async created() {
-    const moments = await this.$http.get('https://api.neverworkaday.com/organizations/mirego/moments');
+    const moments = await this.$http.get(process.env.VUE_APP_MOMENTS_API);
     this.moments = moments.data;
   }
 }

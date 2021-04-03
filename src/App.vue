@@ -37,16 +37,9 @@
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
-      <!-- <v-container>
-        <v-row>
-          <v-spacer />
-            <v-col xs=12>
-              <router-view></router-view>
-            </v-col>
-          <v-spacer />
-        </v-row>
-      </v-container> -->
+      <v-fab-transition>
+        <router-view></router-view>
+      </v-fab-transition>
     </v-main>
   </v-app>
 </template>
@@ -54,12 +47,15 @@
 <script>
 export default {
   name: 'App',
-
-  components: {
+  data() {
+    return {};
   },
+  created() {
+    const data = this.getSavedData();
 
-  data: () => ({
-    //
-  }),
+    if(data == null) {
+      this.saveData({ liked: [], comments: [] });
+    }
+  }
 };
 </script>

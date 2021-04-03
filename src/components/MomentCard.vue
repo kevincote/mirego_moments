@@ -1,6 +1,5 @@
 <template>
   <v-card
-    max-height="1000"
     max-width="700"
   >
     <v-card-text>
@@ -25,18 +24,33 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-img
-      :src="moment.media.large"
-    >
-    </v-img>
+
+    <router-link :to="'/moment/' + moment.id">
+      <v-img
+        :src="moment.media.large"
+      >
+        <template v-slot:placeholder>
+          <v-row
+            class="fill-height ma-0"
+            align="center"
+            justify="center"
+          >
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            />
+          </v-row>
+        </template>
+      </v-img>
+    </router-link>
 
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
+      <v-btn icon @click="likeMoment(moment.id)">
+        <v-icon :color="heartColor">mdi-heart</v-icon>
       </v-btn>
-      <span class="subheading mr-2">{{ moment.emotions.love }}</span>
+      <span class="subheading mr-2">{{ totalLove }}</span>
 
       <v-btn icon>
         <v-icon>mdi-account</v-icon>
@@ -49,12 +63,16 @@
       >
         <v-icon>mdi-comment</v-icon>
       </v-btn>
-      <span class="subheading mr-2">{{ moment.comments_count }}</span>
+      <span class="subheading mr-2">{{ totalComments }}</span>
     </v-card-actions>
 
     <v-expand-transition>
-      <v-card-actions v-show="commentsVisible">
-        <moment-comments :moment-id="moment.id" />
+      <v-card-actions v-show="defaultCommentsVisible || commentsVisible">
+        <moment-comments
+          :moment-id="moment.id"
+          :comments-data="moment.comments"
+          @new-personnal-comment="commentsCountByMe++"
+        />
       </v-card-actions>
     </v-expand-transition>
   </v-card>
@@ -72,14 +90,60 @@ export default {
     moment: {
       type: Object,
       required: true,
+    },
+    defaultCommentsVisible: {
+      type: Boolean,
+      default: false,
     }
+  },
+  computed: {
+    heartColor() {
+      return this.likedByMe ? 'red' : '';
+    },
+    totalLove() {
+      let love = this.moment.emotions.love;
+
+      if (this.likedByMe) love++
+
+      return love;
+    },
+    totalComments() {
+      let commentsCount = this.moment.comments_count || this.moment.comments.length;
+
+      return commentsCount + this.commentsCountByMe;
+    },
   },
   data() {
     return {
-      commentsVisible: false
+      commentsVisible: false,
+      likedByMe: this.isMomentLiked(this.moment.id),
+      commentsCountByMe: this.getPersonnalComments().length,
     }
   },
   methods: {
+    likeMoment(momentId) {
+      const personnalMomentsData = this.getSavedData();
+
+      if (this.isMomentLiked(momentId)) {
+        personnalMomentsData.liked = personnalMomentsData.liked.filter((id) => id !== momentId);
+        this.likedByMe = false;
+      } else {
+        personnalMomentsData.liked.push(momentId);
+        this.likedByMe = true;
+      }
+
+      this.saveData(personnalMomentsData);
+    },
+    isMomentLiked(momentId) {
+      const personnalMomentsData = this.getSavedData();
+
+      return personnalMomentsData.liked.includes(momentId);
+    },
+    getPersonnalComments() {
+      const data = this.getSavedData();
+
+      return data.comments.filter((comment) => comment.momentId === this.moment.id);
+    },
   }
 }
 </script>

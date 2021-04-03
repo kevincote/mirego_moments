@@ -11,13 +11,22 @@ const routes = [
     component: Home
   },
   {
-    path: '/:id',
+    path: '/moment/:id',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Moment.vue')
-  }
-]
+    component: () => import(/* webpackChunkName: "moment" */ '../views/Moment.vue')
+  },
+  {
+    path: "not-found",
+    name: "404",
+    component: () => import(/* webpackChunkName: "404" */ '../views/NotFound.vue')
+  },
+  {
+    path: "*",
+    component: () => import(/* webpackChunkName: "404" */ '../views/NotFound.vue')
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
