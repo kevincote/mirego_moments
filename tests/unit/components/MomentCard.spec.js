@@ -46,7 +46,7 @@ describe('MomentCard.vue', () => {
     it('should hide the comments section', () => {
       const commentsComponent = wrapper.findComponent(MomentComments);
 
-      expect(commentsComponent.isVisible()).to.eq(false);
+      expect(commentsComponent.exists()).to.eq(false);
     });
 
     it('when clicking on the comment icon it should open the comments section of the card', async() => {

@@ -15,7 +15,7 @@ describe('Home.vue', () => {
   });
 
   it('should store the moments in the moments variable', () => {
-    expect(wrapper.vm.moments).to.eq(momentsData.data);
+    expect(wrapper.vm.moments).to.deep.equal(momentsData.data);
   });
 })
 

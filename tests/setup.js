@@ -1,5 +1,3 @@
-/* global global */
-
 // CUSTOM CONFIG
 const vuetify = require('vuetify');
 const chai = require('chai');

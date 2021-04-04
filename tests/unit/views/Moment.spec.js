@@ -37,6 +37,14 @@ describe('Moment.vue', () => {
   it('should store the moment in the moment variable', () => {
     expect(wrapper.vm.moment).to.equal(momentData.data);
   });
+
+  describe('onClickOutside', () => {
+    it('should redirect to home', () => {
+      wrapper.vm.onClickOutside();
+
+      expect(wrapper.vm.$router.push).to.have.been.calledWith({ name: 'Home' });
+    });
+  });
 })
 
 
@@ -54,7 +62,10 @@ function contextComponent(propsData) {
       },
       $route: {
         params: { id: momentData.data.id }
-      }
+      },
+      $router : {
+        push: sinon.stub(),
+      },
     },
     localVue,
     vuetify,

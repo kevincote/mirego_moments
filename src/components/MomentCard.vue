@@ -58,7 +58,7 @@
 
       <v-btn
         icon
-        :color="commentsVisible || defaultCommentsVisible ? 'secondary' : ''"
+        :color="commentsVisible || defaultCommentsVisible ? 'accent' : ''"
         @click="commentsVisible = !commentsVisible"
       >
         <v-icon>mdi-comment</v-icon>
