@@ -25,18 +25,34 @@ const momentData = {
 }
 
 describe('Moment.vue', () => {
-  beforeEach(async() => {
-    wrapper = contextComponent();
-    await wrapper.vm.$nextTick();
+  context('when moment is found', () => {
+    beforeEach(async() => {
+      const mockGetFn = sinon.stub().resolves(momentData);
+
+      wrapper = contextComponent({}, mockGetFn);
+      await wrapper.vm.$nextTick();
+    });
+
+    it('should call the API with the moment id to retrieve the comments', () => {
+      expect(wrapper.vm.$http.get).to.have.been.calledWith(process.env.VUE_APP_SINGLE_MOMENT_API + momentData.data.id);
+    });
+
+    it('should store the moment in the moment variable', () => {
+      expect(wrapper.vm.moment).to.equal(momentData.data);
+    });
   });
 
-  it('should call the API with the moment id to retrieve the comments', () => {
-    expect(wrapper.vm.$http.get).to.have.been.calledWith(process.env.VUE_APP_SINGLE_MOMENT_API + momentData.data.id);
+  context('when moment is not found', () => {
+    it('should redirect to 404 page', async() => {
+      const mockGetFn = sinon.stub().throws();
+
+      wrapper = contextComponent({}, mockGetFn);
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.$router.push).to.have.been.calledWith({ name: '404' });
+    });
   });
 
-  it('should store the moment in the moment variable', () => {
-    expect(wrapper.vm.moment).to.equal(momentData.data);
-  });
 
   describe('onClickOutside', () => {
     it('should redirect to home', () => {
@@ -48,7 +64,7 @@ describe('Moment.vue', () => {
 })
 
 
-function contextComponent(propsData) {
+function contextComponent(propsData, mockGetFn) {
   const localVue = createLocalVue();
   const vuetify = new Vuetify();
 
@@ -58,7 +74,7 @@ function contextComponent(propsData) {
     },
     mocks: {
       $http: {
-        get: sinon.stub().resolves(momentData),
+        get: mockGetFn,
       },
       $route: {
         params: { id: momentData.data.id }
