@@ -14,6 +14,7 @@
             :moment="moment"
             align="left"
             v-click-outside="onClickOutside"
+            open-as-single-moment
           />
         </v-col>
         <v-col cols=2 />
@@ -30,6 +31,12 @@ export default {
   components: {
     MomentCard,
   },
+  props: {
+    momentId: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       moment: null,
@@ -37,7 +44,7 @@ export default {
   },
   async created() {
     try {
-      const moment = await this.$http.get(`https://api.neverworkaday.com/moments/${this.$route.params.id}`);
+      const moment = await this.$http.get(`https://api.neverworkaday.com/moments/${this.momentId}`);
       this.moment = moment.data;
     } catch (e) {
       this.$router.push({ name: '404' });
@@ -45,8 +52,13 @@ export default {
   },
   methods: {
     onClickOutside() {
-      this.$router.push({ name: 'Home' });
+      this.$emit('close-moment')
+      //this.$router.push({ name: 'Home' });
     }
   }
 }
 </script>
+
+<style scoped>
+
+</style>

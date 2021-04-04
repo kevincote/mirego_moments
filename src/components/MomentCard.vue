@@ -1,6 +1,6 @@
 <template>
   <v-card
-    max-width="700"
+    :max-width="openAsSingleMoment ? 1000 : 700"
     elevation="10"
   >
     <v-card-text>
@@ -15,35 +15,37 @@
           </div>
         </v-col>
         <v-col cols=11>
-            <div class="moment-description">
-              {{ moment.description}}
-            </div>
+          <div class="moment-description">
+            {{ moment.description}}
+          </div>
 
-            <div class="moment-author">
-              by {{ moment.user.full_name}} {{ momentjs(moment.created_at).fromNow() }}
-            </div>
+          <div class="moment-author">
+            by {{ moment.user.full_name}} {{ momentjs(moment.created_at).fromNow() }}
+          </div>
         </v-col>
       </v-row>
     </v-card-text>
 
-    <router-link :to="'/moment/' + moment.id">
-      <v-img
-        :src="moment.media.large"
-      >
-        <template v-slot:placeholder>
-          <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular
-              indeterminate
-              color="grey lighten-5"
-            />
-          </v-row>
-        </template>
-      </v-img>
-    </router-link>
+    <!-- <router-link :to="'/moment/' + moment.id"> -->
+    <v-img
+      :src="moment.media.large"
+      :class="openAsSingleMoment ? '' : 'moment-img'"
+      @click="openAsSingleMoment ? null : $emit('open-moment', moment.id)"
+    >
+      <template v-slot:placeholder>
+        <v-row
+          class="fill-height ma-0"
+          align="center"
+          justify="center"
+        >
+          <v-progress-circular
+            indeterminate
+            color="grey lighten-5"
+          />
+        </v-row>
+      </template>
+    </v-img>
+    <!-- </router-link> -->
 
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -96,7 +98,11 @@ export default {
     defaultCommentsVisible: {
       type: Boolean,
       default: false,
-    }
+    },
+    openAsSingleMoment: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     heartColor() {
@@ -146,9 +152,6 @@ export default {
 
       return data.comments.filter((comment) => comment.momentId === this.moment.id);
     },
-    onClickOutside() {
-
-    },
   }
 }
 </script>
@@ -167,7 +170,7 @@ export default {
   color: lightgray;
 }
 
-.org-thumb {
-  justify-content: ;
+.moment-img {
+  cursor: pointer !important;
 }
 </style>

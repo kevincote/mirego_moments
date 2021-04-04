@@ -16,27 +16,36 @@
           :key="moment.id"
         >
           <div class="moment">
-            <moment-card :moment="moment" />
+            <moment-card :moment="moment" @open-moment="openMoment" />
           </div>
         </v-col>
       </v-row>
+      <v-overlay
+        :value="overlay"
+      >
+        <moment :moment-id="overlayMomentId" @close-moment="overlay = false" class="overlay-moment"></moment>
+      </v-overlay>
     </v-container>
   </div>
 </template>
 
 <script>
+import Moment from '@/views/Moment.vue';
 import MomentCard from '@/components/MomentCard.vue';
 
 export default {
   name: 'Home',
   components: {
     MomentCard,
+    Moment,
   },
   data() {
     return {
       moments: [],
       oldestData: undefined,
       bottom: false,
+      overlay: false,
+      overlayMomentId: undefined,
     }
   },
   created() {
@@ -71,7 +80,11 @@ export default {
       }
 
       return url;
-    }
+    },
+    openMoment(momentId) {
+      this.overlay = true;
+      this.overlayMomentId = momentId;
+    },
   },
   watch: {
     bottom(bottom) {
@@ -102,5 +115,11 @@ export default {
 
 .moments-description {
   color: rgb(65, 65, 65);
+}
+
+.overlay-moment {
+  position: absolute;
+  width: 1200px;
+  left: -500px;
 }
 </style>

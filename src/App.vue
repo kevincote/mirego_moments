@@ -39,9 +39,7 @@
     </v-app-bar>
 
     <v-main class="main">
-      <v-fab-transition>
-        <router-view></router-view>
-      </v-fab-transition>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
