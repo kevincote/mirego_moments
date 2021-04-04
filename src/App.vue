@@ -4,20 +4,21 @@
       app
       color="white"
       dark
-      height="50"
+      height="40"
       elevation="3"
     >
       <router-link to="/">
         <v-img
           :src="require('@/assets/logo.png')"
-          max-width="200"
-          max-height="50"
+          max-width="180"
+          max-height="40"
         />
       </router-link>
 
       <v-spacer></v-spacer>
 
       <v-btn
+        small
         depressed
         tile
         text
@@ -27,6 +28,7 @@
         Log in
       </v-btn>
       <v-btn
+        small
         depressed
         tile
         color="secondary"
