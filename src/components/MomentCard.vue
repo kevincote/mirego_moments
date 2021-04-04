@@ -9,8 +9,6 @@
           <div class="org-thumb">
             <v-img
               :src="moment.organization.avatar.thumb"
-              max-height="40px"
-              max-width="40px"
             />
           </div>
         </v-col>
@@ -168,6 +166,7 @@ export default {
 }
 
 .org-thumb {
-  justify-content: ;
+  min-width: 20px;
+  margin-top: 5px;
 }
 </style>
