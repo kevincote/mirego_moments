@@ -3,8 +3,8 @@
     <v-container>
       <v-row justify="center">
         <div class="header">
-          <div class="text-h3 moments-title">Moments</div>
-          <div class="moments-description">Here is a list of all moments from all organizations. If this is too much for you, you can also see a list of all organizationsthat share moments.</div>
+          <div class="moments-title">Moments</div>
+          <div class="moments-description">Immortalize and share your best work memories.</div>
         </div>
       </v-row>
       <v-row>
@@ -96,11 +96,14 @@ export default {
 }
 
 .moments-title {
-  font-weight: 700;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 60px;
   padding-bottom: 20px;
 }
 
 .moments-description {
   color: rgb(65, 65, 65);
+  font-family: 'Architects Daughter', cursive;
+  font-size: 30px;
 }
 </style>

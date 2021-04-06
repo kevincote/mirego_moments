@@ -2,17 +2,14 @@
   <v-app>
     <v-app-bar
       app
-      color="white"
-      dark
+      color="blue-grey lighten-5"
       height="40"
       elevation="3"
     >
       <router-link to="/">
-        <v-img
-          :src="require('@/assets/logo.png')"
-          max-width="180"
-          max-height="40"
-        />
+        <v-toolbar-title class="moments-appbar-title">
+          Moments
+        </v-toolbar-title>
       </router-link>
 
       <v-spacer></v-spacer>
@@ -31,10 +28,10 @@
         small
         depressed
         tile
-        color="secondary"
+        color="accent"
         to="/sign-up"
       >
-        <span style="color: #4175A5">Sign up</span>
+        <span style="color: white">Sign up</span>
       </v-btn>
     </v-app-bar>
 
@@ -69,5 +66,10 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
+}
+
+.moments-appbar-title {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 23px;
 }
 </style>

@@ -2,10 +2,10 @@
   <div class="moment">
     <v-container>
       <v-row>
-        <v-col cols=2 />
         <v-col
           xs=12
           md=8
+          offset-md=2
           align=center
         >
           <moment-card
@@ -16,7 +16,6 @@
             v-click-outside="onClickOutside"
           />
         </v-col>
-        <v-col cols=2 />
       </v-row>
     </v-container>
   </div>

@@ -54,4 +54,9 @@ export default {
 .comment {
   font-size: 15px;
 }
+
+.user-thumb {
+  min-width: 20px;
+  margin-top: 5px;
+}
 </style>
