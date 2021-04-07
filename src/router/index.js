@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import goTo from 'vuetify/es5/services/goto'
 
 Vue.use(VueRouter)
 
@@ -36,7 +37,22 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+  scrollBehavior: (to, from, savedPosition) => {
+    if(from.fullPath.startsWith('/moment/') && to.fullPath == "/") {
+      setTimeout(() => {
+        let scrollTo = 0
+
+        if (to.hash) {
+          scrollTo = to.hash
+        } else if (savedPosition) {
+          scrollTo = savedPosition.y
+        }
+
+        return goTo(scrollTo)
+      }, 500);
+    }
+  },
+});
 
 export default router

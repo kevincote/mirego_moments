@@ -27,6 +27,7 @@
     <router-link :to="'/moment/' + moment.id">
       <v-img
         :src="moment.media.large"
+        lazy-src="https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png"
       >
         <template v-slot:placeholder>
           <v-row
@@ -112,6 +113,9 @@ export default {
 
       return commentsCount + this.commentsCountByMe;
     },
+    oldestDateLoaded() {
+      return this.$parent.oldestData;
+    }
   },
   data() {
     return {

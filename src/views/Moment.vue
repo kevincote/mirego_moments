@@ -13,7 +13,6 @@
             default-comments-visible
             :moment="moment"
             align="left"
-            v-click-outside="onClickOutside"
           />
         </v-col>
       </v-row>
@@ -42,10 +41,5 @@ export default {
       this.$router.push({ name: '404' });
     }
   },
-  methods: {
-    onClickOutside() {
-      this.$router.push({ name: 'Home' });
-    }
-  }
 }
 </script>
