@@ -144,9 +144,6 @@ export default {
 
       return data.comments.filter((comment) => comment.momentId === this.moment.id);
     },
-    onClickOutside() {
-
-    },
   }
 }
 </script>

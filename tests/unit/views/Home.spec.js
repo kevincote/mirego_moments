@@ -17,6 +17,26 @@ describe('Home.vue', () => {
   it('should store the moments in the moments variable', () => {
     expect(wrapper.vm.moments).to.deep.equal(momentsData.data);
   });
+
+  describe('triggerInfiniteScroll', () => {
+    context('when not intersecting', () => {
+      it('should not fetch new moments', () => {
+        wrapper.vm.fetchMoments = sinon.stub();
+        wrapper.vm.triggerInfiniteScroll({}, {}, false);
+
+        expect(wrapper.vm.fetchMoments).to.not.have.been.called;
+      });
+    });
+
+    context('when intersecting', () => {
+      it('should fetch new moments', () => {
+        wrapper.vm.fetchMoments = sinon.stub();
+        wrapper.vm.triggerInfiniteScroll({}, {}, true);
+
+        expect(wrapper.vm.fetchMoments).to.have.been.called;
+      });
+    });
+  });
 })
 
 

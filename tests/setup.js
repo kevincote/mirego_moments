@@ -20,3 +20,14 @@ global.shallowMount = testUtils.shallowMount;
 global.createWrapper = testUtils.createWrapper;
 global.sinon = sinon;
 global.context = describe;
+global.IntersectionObserver = class IntersectionObserver {
+  constructor() {}
+
+  disconnect() {
+    return null;
+  }
+
+  observe() {
+    return null;
+  }
+};
