@@ -12,11 +12,14 @@
           xs=12
           sm=6
           md=4
-          v-for="moment in moments"
+          v-for="(moment, i) in moments"
           :key="moment.id"
         >
           <div class="moment">
-            <moment-card :moment="moment" />
+            <moment-card
+              :moment="moment"
+            />
+            <div v-if="i == lastMomentIndex" v-intersect="triggerInfiniteScroll" />
           </div>
         </v-col>
       </v-row>
@@ -32,18 +35,18 @@ export default {
   components: {
     MomentCard,
   },
+  computed: {
+    lastMomentIndex() {
+      return this.moments.length - 1;
+    },
+  },
   data() {
     return {
       moments: [],
       oldestData: undefined,
-      bottom: false,
     }
   },
   created() {
-    window.addEventListener('scroll', () => {
-      this.bottom = this.bottomVisible()
-    })
-
     this.fetchMoments();
   },
   methods: {
@@ -55,14 +58,6 @@ export default {
 
       this.oldestData = this.moments.slice(-1)[0].created_at;
     },
-    bottomVisible() {
-      const scrollY = window.scrollY;
-      const visible = document.documentElement.clientHeight;
-      const pageHeight = document.documentElement.scrollHeight;
-      const bottomOfPage = visible + scrollY >= pageHeight;
-
-      return bottomOfPage || pageHeight < visible;
-    },
     buildUrl() {
       let url = process.env.VUE_APP_MOMENTS_API;
 
@@ -71,14 +66,12 @@ export default {
       }
 
       return url;
-    }
-  },
-  watch: {
-    bottom(bottom) {
-      if (bottom) {
-        this.fetchMoments();
-      }
-    }
+    },
+    triggerInfiniteScroll(entries, observer, isIntersecting) {
+      if (!isIntersecting) return;
+
+      this.fetchMoments();
+    },
   },
 }
 </script>
