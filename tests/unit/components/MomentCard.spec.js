@@ -126,19 +126,6 @@ describe('MomentCard.vue', () => {
     });
   });
 
-  describe('getPersonnalComments', () => {
-    it('should return the saved comments from the localStorage', () => {
-      wrapper = contextComponent({ moment: fakeMoment });
-      const expectedComment = { momentId: fakeMomentId };
-      const commentsInStorage = [expectedComment, { momentId: 'anotherMomentCommentId' }];
-      localStorageData = { liked: [], comments: commentsInStorage };
-
-      const comments = wrapper.vm.getPersonnalComments();
-
-      expect(comments).to.deep.equal([expectedComment]);
-    });
-  });
-
   describe('heartColor', () => {
     beforeEach(() => {
       wrapper = contextComponent({ moment: fakeMoment });
@@ -193,9 +180,8 @@ function contextComponent(propsData) {
     },
     mocks: {
       momentjs: moment,
-      getSavedData() {
-        return localStorageData;
-      },
+      getSavedData: () => localStorageData,
+      getPersonnalComments: () => [],
     },
     stubs: {
       'moment-comments': { template: '<div class="moment-comments" />' },

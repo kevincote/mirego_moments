@@ -96,20 +96,7 @@ describe('MomentComments.vue', () => {
       expect(wrapper.emitted('new-personnal-comment')).to.deep.equal([[]]);
     });
   });
-
-  describe('getPersonnalComments', () => {
-    it('should return the saved comments from the localStorage', () => {
-      wrapper = contextComponent({ momentId });
-      const expectedComment = { momentId };
-      const commentsInStorage = [expectedComment, { momentId: 'anotherMomentCommentId' }];
-      localStorageData = { liked: [], comments: commentsInStorage };
-
-      const comments = wrapper.vm.getPersonnalComments();
-
-      expect(comments).to.deep.equal([expectedComment]);
-    });
-  });
-})
+});
 
 
 function contextComponent(propsData) {
@@ -124,9 +111,8 @@ function contextComponent(propsData) {
       $http: {
         get: sinon.stub().resolves(momentData),
       },
-      getSavedData() {
-        return localStorageData;
-      }
+      getSavedData: () => localStorageData,
+      getPersonnalComments: () => [],
     },
     localVue,
     vuetify,
