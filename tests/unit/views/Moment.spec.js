@@ -52,16 +52,7 @@ describe('Moment.vue', () => {
       expect(wrapper.vm.$router.push).to.have.been.calledWith({ name: '404' });
     });
   });
-
-
-  describe('onClickOutside', () => {
-    it('should redirect to home', () => {
-      wrapper.vm.onClickOutside();
-
-      expect(wrapper.vm.$router.push).to.have.been.calledWith({ name: 'Home' });
-    });
-  });
-})
+});
 
 
 function contextComponent(propsData, mockGetFn) {
