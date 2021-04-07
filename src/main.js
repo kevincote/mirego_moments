@@ -8,6 +8,7 @@ import vuetify from './plugins/vuetify';
 import axios from 'axios'
 import moment from 'moment'
 import accessDataMixin from '@/mixins/accessData.js';
+import personnalCommentsMixin from '@/mixins/personnalComments.js';
 
 Vue.prototype.$http = axios
 Vue.prototype.momentjs = moment
@@ -15,6 +16,7 @@ Vue.prototype.momentjs = moment
 Vue.config.productionTip = false
 
 Vue.mixin(accessDataMixin);
+Vue.mixin(personnalCommentsMixin);
 
 new Vue({
   router,

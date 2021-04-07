@@ -84,11 +84,6 @@ export default {
       this.personnalComments.push(commentToSave);
       this.$emit('new-personnal-comment');
     },
-    getPersonnalComments() {
-      const data = this.getSavedData();
-
-      return data.comments.filter((comment) => comment.momentId === this.momentId);
-    },
   }
 }
 </script>

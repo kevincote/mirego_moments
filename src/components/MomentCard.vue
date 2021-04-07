@@ -113,9 +113,6 @@ export default {
 
       return commentsCount + this.commentsCountByMe;
     },
-    oldestDateLoaded() {
-      return this.$parent.oldestData;
-    }
   },
   data() {
     return {
@@ -142,11 +139,6 @@ export default {
       const personnalMomentsData = this.getSavedData();
 
       return personnalMomentsData.liked.includes(momentId);
-    },
-    getPersonnalComments() {
-      const data = this.getSavedData();
-
-      return data.comments.filter((comment) => comment.momentId === this.moment.id);
     },
   }
 }
