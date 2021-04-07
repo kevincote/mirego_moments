@@ -118,7 +118,7 @@ export default {
     return {
       commentsVisible: false,
       likedByMe: this.isMomentLiked(this.moment.id),
-      commentsCountByMe: this.getPersonnalComments().length,
+      commentsCountByMe: this.getPersonnalComments(this.moment.id).length,
     }
   },
   methods: {

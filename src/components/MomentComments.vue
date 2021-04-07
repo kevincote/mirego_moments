@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       comments: [],
-      personnalComments: this.getPersonnalComments(),
+      personnalComments: this.getPersonnalComments(this.momentId),
       newComment: '',
     }
   },

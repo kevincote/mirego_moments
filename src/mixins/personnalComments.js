@@ -1,9 +1,9 @@
 const personnalCommentsMixin = {
   methods: {
-    getPersonnalComments() {
+    getPersonnalComments(momentId) {
       const data = this.getSavedData();
 
-      return data.comments.filter((comment) => comment.momentId === this.momentId);
+      return data.comments.filter((comment) => comment.momentId === momentId);
     },
   },
 };

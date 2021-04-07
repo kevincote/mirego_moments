@@ -24,14 +24,14 @@ describe('personnalCommentsMixin', () => {
     });
 
     it('should fetch the data and return the comments matching the actual momentId', () => {
-      wrapper.vm.getPersonnalComments();
+      wrapper.vm.getPersonnalComments(fakeMomentId);
 
       expect(wrapper.vm.getSavedData).to.have.been.called;
     });
 
     it('should return the comments matching the actual momentId', () => {
       const expectedCommentsData = [{ momentId: fakeMomentId }];
-      expect(wrapper.vm.getPersonnalComments()).to.deep.equal(expectedCommentsData);
+      expect(wrapper.vm.getPersonnalComments(fakeMomentId)).to.deep.equal(expectedCommentsData);
     });
   });
 });
